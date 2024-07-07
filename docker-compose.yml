@@ -1,7 +1,7 @@
-version: '3.8'
+version: '1.0'
 services:
-  hng_stage_1_app:
-    image: stage_1_app:latest
+  stage_one_task:
+    image: stage_one_task:latest
     build:
       context: .
       dockerfile: Dockerfile
