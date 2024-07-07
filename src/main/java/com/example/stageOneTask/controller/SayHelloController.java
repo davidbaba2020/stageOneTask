@@ -17,9 +17,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class SayHelloController {
  private final HelloService helloService;
-
     @GetMapping("/api/hello")
-    public ResponseEntity<GenericResponse> sayHello(@RequestParam(name = "visitor_name") String visitor_name, HttpServletRequest request) throws IOException {
+    public ResponseEntity<GenericResponse>sayHello(@RequestParam(name="visitor_name") String visitor_name, HttpServletRequest request) throws IOException {
         GenericResponse response = helloService.getGreeting(visitor_name, request);
         return ResponseEntity.ok(response);
     }

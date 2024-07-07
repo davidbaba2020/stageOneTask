@@ -20,6 +20,11 @@ public class WeatherResponse {
     private long id;
     private String name;
     private int cod;
+    private String message;
+
+    public WeatherResponse(String message) {
+        this.message = message;
+    }
 
     @Data
     public static class Coord {
