@@ -1,14 +1,13 @@
-# Use an official OpenJDK 21 runtime as a parent image
-FROM openjdk:17-jdk-slim
-
-# Set the working directory in the container
+# Stage 1: Build the JAR file
+FROM maven:3.8.1-openjdk-11 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package
 
-# Copy the JAR file from the host machine to the container
-COPY /target/stageOneTask.jar app.jar
-
-# Expose the port the application runs on
+# Stage 2: Build the final image
+FROM openjdk:11-jre-slim
+WORKDIR /app
+COPY --from=build /app/target/stageOneTask.jar ./stageOneTask.jar
 EXPOSE 8080
-
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "stageOneTask.jar"]
